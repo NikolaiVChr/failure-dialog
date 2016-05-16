@@ -1,8 +1,13 @@
 # Failure Dialog for Flightgear
 
-## Install:
+## Install for Flightgear 2016.1/2016.2:
 
 Copy all the files, except README.md and LICENSE, into your Flightgear installation under the folder data ($FGDATA).
+
+## Install for Flightgear 3.4
+
+Copy the Nasal folder, into your Flightgear installation under the folder data ($FGDATA).
+The go back in my commit history and notice the commit "Modifications to some FG files nessesary to show the new Dialog from the menu.", do those modifications to the 3 files in your FG 3.4.
 
 ## Use:
 
