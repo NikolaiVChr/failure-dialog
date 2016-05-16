@@ -1,4 +1,7 @@
 # A failure panel widget
+#
+# Contributors: Nikolai V. Chr. (Necolatis)
+#
 gui.widgets.Failure = {
   new: func(parent, style, cfg)
   {
@@ -613,7 +616,6 @@ FailureFactory = {
     way_item.addItem(distLabel);
     way_item.addItem(wayEdit);
     way_item.addItem(wayLabel);
-   # way_item.addItem(dist_buttons_item);
     way_item.addStretch(1);
     way_item.addStretch(1);
     way_item.addStretch(1);
@@ -630,7 +632,7 @@ FailureFactory = {
       trigger = compat_failure_modes.WaypointTrigger.new(airport.lat, airport.lon, input_dist);
       
       FailureMgr.set_trigger(path, trigger);
-      #trigger.disarm();
+
       me._updateTriggerDescription(labelDesc, button, trigger);
     } else {
       input_icao = "XXXX";
@@ -859,7 +861,10 @@ FailureFactory = {
     var value_item = gui.widgets.Label.new(me._scroll_content, style, {})
                          .setText(mode_fail_level_value)
                          .setFixedSize(50, 30);
-    value_item._view.update = func;#I do not remember what this does, should have added comment
+                         
+    # I think I did this due to adding color to this label, so it does not get overwritten
+    value_item._view.update = func;
+
     me._setLevelColor(level, value_item);
     top_item.addItem(value_item);
     
@@ -905,7 +910,6 @@ FailureFactory = {
       if (update_in_progress == 0) {
         mtbfTrigger = compat_failure_modes.MtbfTrigger.new(3600);        
         FailureMgr.set_trigger(path, mtbfTrigger);
-        #mtbfTrigger.disarm();#start inactive so it wont fail immidiate after installing, before proper value set through GUI.
       } else {
         mtbfTrigger = failure_mode.trigger;
       }
@@ -939,7 +943,6 @@ FailureFactory = {
       if (update_in_progress == 0) {
         timeTrigger = compat_failure_modes.TimeoutTrigger.new(3600);
         FailureMgr.set_trigger(path, timeTrigger);
-        #timeTrigger.disarm();#start inactive so it wont fail immidiate after installing, beofre proper value set through GUI.
       } else {
         timeTrigger = failure_mode.trigger;
       }
@@ -973,7 +976,6 @@ FailureFactory = {
       if (update_in_progress == 0) {
         altTrigger = compat_failure_modes.AltitudeTrigger.new(5000, 10000);
         FailureMgr.set_trigger(path, altTrigger);
-        #altTrigger.disarm();#start inactive so it wont fail immidiate after installing, beofre proper value set through GUI.
       } else {
         altTrigger = failure_mode.trigger;
       }
@@ -1005,10 +1007,8 @@ FailureFactory = {
       buttonWay.setEnabled(0);
       var wayTrigger = nil;
       if (update_in_progress == 0) {
-        #var ap = geo.aircraft_position();
         wayTrigger = compat_failure_modes.WaypointTrigger.new(0, 0, 1);
         FailureMgr.set_trigger(path, wayTrigger);
-        #wayTrigger.disarm();#start inactive so it wont fail immidiate after installing, before proper value set through GUI.
       } else {
         wayTrigger = failure_mode.trigger;
       }
@@ -1065,7 +1065,6 @@ FailureFactory = {
         if (update_in_progress == 0) {
           mcbfTrigger = compat_failure_modes.McbfTrigger.new(mcbf_property, mcbf_cycles);
           FailureMgr.set_trigger(path, mcbfTrigger);
-          #mcbfTrigger.disarm();
         } else {
           mcbfTrigger = failure_mode.trigger;
         }
@@ -1153,20 +1152,16 @@ FailureFactory = {
     buttonLevelMinus.listen("clicked", func
     {
 
-    #  if(active_button != nil and active_button != buttonNone) {
-    #    active_button.setChecked(0);
-    #    active_button = buttonNone;
-    #    buttonNone.setChecked(1);
-    #  }
       # decrease level
-      level -= 0.05;
+      level -= 1; # 0.05; enable this in future when gradient lvl become supported
       if(level < 0) {
         level = 0;
       }
       FailureMgr.set_failure_level(path, level);
       level = failure_mode.mode.get_failure_level();
       if (level == 1) {
-        # actuator does not support gradient levels
+        # actuator does not support gradient levels yet, so actuators will not allow to decrease in small amounts
+        # therefore we do a bigger step and go all the way to 0.
         level = 0;
       }
       me._setLevelColor(level, value_item);
@@ -1181,13 +1176,8 @@ FailureFactory = {
 
     buttonLevelPlus.listen("clicked", func
     {
-    #  if(active_button != nil and active_button != buttonNone) {
-    #    active_button.setChecked(0);
-    #    active_button = buttonNone;
-    #    buttonNone.setChecked(1);
-    #  }
       # increase level
-      level += 0.05;
+      level += 1; # 0.05;  enable this in future when gradient lvl become supported
       if(level > 1) {
         level = 1;
       }
@@ -1203,11 +1193,6 @@ FailureFactory = {
     buttonLevelRepair.listen("clicked", func
     {
 
-    #  if(active_button != nil and active_button != buttonNone) {
-    #    active_button.setChecked(0);
-    #    active_button = buttonNone;
-    #    buttonNone.setChecked(1);
-    #  }
       level = 0;
       FailureMgr.set_failure_level(path, level);
       me._setLevelColor(level, value_item);
