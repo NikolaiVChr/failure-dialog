@@ -17,3 +17,7 @@ Enjoy!
 ## How do I see all the features that it can do:
 
 Try the plane JA37, it has a bunch of custom failures.
+
+## Screenshot
+
+![alt tag](http://s4.postimg.org/5tee5eagd/Failure_Mgr03.png)
