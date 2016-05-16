@@ -66,6 +66,7 @@
 	<random-failures>Random Failures</random-failures>
 	<system-failures>System Failures</system-failures>
 	<instrument-failures>Instrument Failures</instrument-failures>
+	<failure-manager>Failure Manager (Experimental)</failure-manager>
 
 	<!-- AI menu -->
 	<ai>AI</ai>

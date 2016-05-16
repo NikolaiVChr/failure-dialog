@@ -442,6 +442,16 @@
 				<dialog-name>instrument-failures</dialog-name>
 			</binding>
 		</item>
+
+		<item>
+			<name>failure-manager</name>
+			<binding>
+				<command>nasal</command>
+				<script>
+				  canvas.loadDialog("FailureDialog");
+				</script>
+			</binding>
+		</item>
 	</menu>
 
 	<menu>

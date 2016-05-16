@@ -25,6 +25,8 @@ loadWidget("CheckBox");
 loadWidget("Label");
 loadWidget("LineEdit");
 loadWidget("ScrollArea");
+loadWidget("Failure");
+loadWidget("Tabs");
 loadDialog("InputDialog");
 loadDialog("MessageBox");
 
