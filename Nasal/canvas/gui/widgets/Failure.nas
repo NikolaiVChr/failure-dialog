@@ -23,11 +23,22 @@ gui.widgets.Failure = {
 
     return m;
   },
-#  del: func() {#ideally this should be called when closing dialog.
-#    print("wee, I was called!")
-#    FailureMgr.events["trigger-fired"].unsubscribe(me._handle);
-    # call parent del() here if needed.
-#  },
+
+  onRemove: func
+  {
+    if( me._view != nil )
+    {
+      # the following 3 lines is only difference from parent Widget destructor:
+      if (me._view._handle != nil) {
+        FailureMgr.events["trigger-fired"].unsubscribe(me._view._handle);
+      }
+      me._view._root.del();
+      me._view = nil;
+    }
+
+    if( me._focused )
+      me.getCanvas()._focused_widget = nil;
+  },
 };
 
 FailureFactory = {
