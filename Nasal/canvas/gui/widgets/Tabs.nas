@@ -1,3 +1,7 @@
+# A panel tabs widget
+#
+# Contributors: Nikolai V. Chr. (Necolatis)
+#
 gui.widgets.Tabs = {
   new: func(parent, style, cfg)
   {

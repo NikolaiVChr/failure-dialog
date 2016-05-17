@@ -1,3 +1,7 @@
+# A failure panel dialog
+#
+# Contributors: Nikolai V. Chr. (Necolatis)
+#
 var FailureDialog = {
   new: func
   {
