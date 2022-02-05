@@ -20,4 +20,4 @@ Try the plane JA37, it has a bunch of custom failures.
 
 ## Screenshot
 
-![alt tag](http://s4.postimg.org/5tee5eagd/Failure_Mgr03.png)
+![alt tag](http://s4.postimg.cc/5tee5eagd/Failure_Mgr03.png)
